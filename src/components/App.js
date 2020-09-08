@@ -24,7 +24,12 @@ export class App extends React.Component {
   };
 
   setFilter = ({ target }) => {
+    const { contacts, filter } = this.state;
     this.setState({ filter: target.value });
+    const filterContacts = contacts.filter(el =>
+      el.name.toLowerCase().includes(filter.toLowerCase()),
+    );
+    !filterContacts.length && this.setState({ filter: '' });
   };
 
   render = () => {
@@ -50,35 +55,3 @@ export class App extends React.Component {
     );
   };
 }
-
-// export default App;
-
-// const Button = ({ changeMessage, label }) => (
-//   <button type="button" onClick={changeMessage}>
-//     {label}
-//   </button>
-// );
-
-// export class App extends React.Component {
-//   state = {
-//     message: new Date().toLocaleTimeString(),
-//   };
-
-//   // Метод который будем передавать в Button для вызова при клике
-//   updateMessage = evt => {
-//     console.log(evt); // Доступен объект события
-
-//     this.setState({
-//       message: new Date().toLocaleTimeString(),
-//     });
-//   };
-
-//   render() {
-//     return (
-//       <>
-//         <span>{this.state.message}</span>
-//         <Button label="Change message" changeMessage={this.updateMessage} />
-//       </>
-//     );
-//   }
-// }
