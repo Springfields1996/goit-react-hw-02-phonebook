@@ -23,14 +23,7 @@ export class App extends React.Component {
     });
   };
 
-  setFilter = ({ target }) => {
-    const { contacts, filter } = this.state;
-    this.setState({ filter: target.value });
-    const filterContacts = contacts.filter(el =>
-      el.name.toLowerCase().includes(filter.toLowerCase()),
-    );
-    !filterContacts.length && this.setState({ filter: '' });
-  };
+  setFilter = ({ target }) => this.setState({ filter: target.value });
 
   render = () => {
     const { contacts, filter } = this.state;
@@ -38,6 +31,10 @@ export class App extends React.Component {
     const filterContacts = contacts.filter(el =>
       el.name.toLowerCase().includes(filter.toLowerCase()),
     );
+
+    setTimeout(() => {
+      !filterContacts.length && this.setState({ filter: '' });
+    }, 2000);
 
     return (
       <div>
